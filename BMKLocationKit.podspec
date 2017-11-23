@@ -122,7 +122,7 @@ Pod::Spec.new do |s|
   s.frameworks = "CoreLocation", "Foundation", "UIKit", "SystemConfiguration", "AdSupport", "Security", "CoreTelephony"
 
   # s.library   = "sqlite3.0"
-  s.lbraries = "sqlite3.0","stdc++.6.0.9"
+  s.libraries = "sqlite3.0","stdc++.6.0.9"
 
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
