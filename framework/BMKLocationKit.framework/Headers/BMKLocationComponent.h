@@ -13,3 +13,4 @@
 #import "BMKGeoFenceRegion.h"
 #import "BMKGeoFenceManager.h"
 #import "BMKLocationReGeocode.h"
+#import "BMKLocationAuth.h"
