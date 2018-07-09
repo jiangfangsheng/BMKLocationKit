@@ -7,7 +7,7 @@
 //
 
 #import "BMKLocationManager.h"
-#import "BMKLocationVersion.h"
+#import "BMKLocationKitVersion.h"
 #import "BMKLocationPoi.h"
 #import "BMKLocation.h"
 #import "BMKGeoFenceRegion.h"
