@@ -39,7 +39,7 @@ typedef NS_ENUM(int, BMKLocationNetworkState) {
 
 ///BMKLocation errorDomain
 
-FOUNDATION_EXPORT NSErrorDomain const BMKLocationErrorDomain;
+FOUNDATION_EXPORT NSErrorDomain const _Nonnull BMKLocationErrorDomain;
 
 ///BMKLocation errorCode
 typedef NS_ENUM(NSInteger, BMKLocationErrorCode)
