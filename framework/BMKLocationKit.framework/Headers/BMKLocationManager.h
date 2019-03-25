@@ -112,6 +112,8 @@ typedef void (^BMKLocatingCompletionBlock)(BMKLocation * _Nullable location, BMK
 @property(nonatomic, retain, nullable) NSString * userID;
 
 
+
+
 /**
  *  @brief 单次定位。如果当前正在连续定位，调用此方法将会失败，返回NO。\n该方法将会根据设定的 desiredAccuracy 去获取定位信息。如果获取的定位信息精确度低于 desiredAccuracy ，将会持续的等待定位信息，直到超时后通过completionBlock返回精度最高的定位信息。\n可以通过 stopUpdatingLocation 方法去取消正在进行的单次定位请求。
  *  @param withReGeocode 是否带有逆地理信息(获取逆地理信息需要联网)
@@ -152,6 +154,16 @@ typedef void (^BMKLocatingCompletionBlock)(BMKLocation * _Nullable location, BMK
  * @brief 该方法为BMKLocationManager停止设备朝向事件回调。
  */
 - (void)stopUpdatingHeading;
+
+/**
+ * @brief 该方法为BMKLocationManager尝试使用高精度室内定位。在特定的室内场景下会有更高精度的定位回调，只在室内定位版本生效。
+ */
+- (void)tryIndoorLocation;
+
+/**
+ * @brief 该方法为BMKLocationManager会关闭高精度室内定位，只在室内定位版本生效。
+ */
+- (void)stopIndoorLocation;
 
 
 /**
