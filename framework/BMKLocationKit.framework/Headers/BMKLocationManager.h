@@ -113,7 +113,6 @@ typedef void (^BMKLocatingCompletionBlock)(BMKLocation * _Nullable location, BMK
 
 
 
-
 /**
  *  @brief 单次定位。如果当前正在连续定位，调用此方法将会失败，返回NO。\n该方法将会根据设定的 desiredAccuracy 去获取定位信息。如果获取的定位信息精确度低于 desiredAccuracy ，将会持续的等待定位信息，直到超时后通过completionBlock返回精度最高的定位信息。\n可以通过 stopUpdatingLocation 方法去取消正在进行的单次定位请求。
  *  @param withReGeocode 是否带有逆地理信息(获取逆地理信息需要联网)
@@ -193,6 +192,14 @@ typedef void (^BMKLocatingCompletionBlock)(BMKLocation * _Nullable location, BMK
 @protocol BMKLocationManagerDelegate <NSObject>
 
 @optional
+
+/**
+ *  @brief 为了适配app store关于新的后台定位的审核机制（app store要求如果开发者只配置了使用期间定位，则代码中不能出现申请后台定位的逻辑），当开发者在plist配置NSLocationAlwaysUsageDescription或者NSLocationAlwaysAndWhenInUseUsageDescription时，需要在该delegate中调用后台定位api：[locationManager requestAlwaysAuthorization]。开发者如果只配置了NSLocationWhenInUseUsageDescription，且只有使用期间的定位需求，则无需在delegate中实现逻辑。
+ *  @param manager 定位 BMKLocationManager 类。
+ *  @param locationManager 系统 CLLocationManager 类 。
+ *  @since 1.6.0
+ */
+- (void)BMKLocationManager:(BMKLocationManager * _Nonnull)manager doRequestAlwaysAuthorization:(CLLocationManager * _Nonnull)locationManager;
 
 /**
  *  @brief 当定位发生错误时，会调用代理的此方法。
