@@ -109,9 +109,7 @@ typedef void (^BMKLocatingCompletionBlock)(BMKLocation * _Nullable location, BMK
 
 
 ///开发者可以指定该用户的id，用于后续统一识别用户，便于查找问题
-@property(nonatomic, retain, nullable) NSString * userID;
-
-
+@property(nonatomic, copy, nullable) NSString * userID;
 
 
 /**

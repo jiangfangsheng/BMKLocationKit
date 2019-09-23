@@ -16,6 +16,12 @@
 ///BMKLocationPoi的名字属性
 @property(nonatomic, copy, readonly) NSString *name;
 
+///BMKLocationPoi的标签属性
+@property(nonatomic, copy, readonly) NSString *tags;
+
+///BMKLocationPoi的地址属性
+@property(nonatomic, copy, readonly) NSString *addr;
+
 ///BMKLocationPoi的可信度
 @property(nonatomic, assign, readonly) float relaiability;
 

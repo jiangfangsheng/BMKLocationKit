@@ -7,6 +7,7 @@
 //
 #import <Foundation/Foundation.h>
 #import "BMKLocationPoi.h"
+#import "BMKLocationPoiRegion.h"
 
 ///BMKLocationReGeocode类。描述跟地址有关的信息.
 @interface BMKLocationReGeocode : NSObject
@@ -25,6 +26,9 @@
 
 ///区名字属性
 @property(nonatomic, copy, readonly) NSString *district;
+
+///乡镇名字属性
+@property(nonatomic, copy, readonly) NSString *town;
 
 ///街道名字属性
 @property(nonatomic, copy, readonly) NSString *street;
@@ -45,6 +49,9 @@
 
 ///位置语义化结果的属性，该定位点周围的poi列表信息
 @property(nonatomic, retain, readonly) NSArray<BMKLocationPoi *> *poiList;
+
+///位置语义化结果的定位点在什么地方周围的描述信息
+@property(nonatomic, strong, readonly) BMKLocationPoiRegion *poiRegion;
 
 /**
  *  @brief 通过NSData初始化方法
