@@ -13,14 +13,14 @@
 
 /**
  *获取当前定位sdk 的版本号
- *当前定位sdk版本 : 1.8.0
+ *当前定位sdk版本 : 1.8.5
  *@return  返回当前定位sdk 的版本号
  */
 UIKIT_EXTERN NSString* BMKLocationKitVersion();
 
 /**
  *获取当前定位sdk 的float版本号
- *当前定位sdk版本 : 1.8
+ *当前定位sdk版本 : 1.85
  *@return  返回当前定位sdk 的float版本号
  */
 UIKIT_EXTERN float BMKLocationKitFloatVersion();

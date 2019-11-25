@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "BMKLocationKit"
-  s.version      = "1.8.0"
+  s.version      = "1.8.2"
   s.summary      = "Baidu IOS Location SDK"
 
   # This description is used to generate tags and improve search results.
