@@ -6,7 +6,7 @@
 //  Copyright © 2017年 baidu. All rights reserved.
 //
 
-
+#import <Availability.h>
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import "BMKLocationReGeocode.h"
@@ -52,6 +52,15 @@ typedef NS_ENUM(NSInteger, BMKLocationErrorCode)
     BMKLocationErrorGetExtraNetworkFailed  = 5,    ///<网络原因导致获取额外信息（地址、网络状态等信息）失败
     BMKLocationErrorGetExtraParseFailed  = 6,      ///<网络返回数据解析失败导致获取额外信息（地址、网络状态等信息）失败
     BMKLocationErrorFailureAuth  = 7,              ///<鉴权失败导致无法返回定位、地址等信息
+};
+
+/** BMKLAccuracyAuthorization 枚举返回定位精度等级
+ *
+ */
+typedef NS_ENUM(NSInteger, BMKLAccuracyAuthorization) {
+    
+    BMKLAccuracyAuthorizationFullAccuracy,         ///<全量定位精度等级，该等级下定位返回结果会尽可能精准
+    BMKLAccuracyAuthorizationReducedAccuracy,      ///<降级定位精度等级，该等级下定位会返回大概5km精度范围的点，定位频率、实时性上也会变慢，比如可能是20分钟之前的点，适用于那些只要求城市级别精度的app使用；ios14之后，该等级受用户控制，需要高等级权限的app需要对应做好适配工作
 };
 
 
@@ -104,12 +113,15 @@ typedef void (^BMKLocatingCompletionBlock)(BMKLocation * _Nullable location, BMK
 ///连续定位是否返回逆地理信息，默认YES。
 @property (nonatomic, assign) BOOL locatingWithReGeocode;
 
-///定位sdk-v1.3之后，开发者可以选择是否需要最新版本rgc数据，默认是不需要NO；YES的情况下，定位sdk会实时返回最新的rgc数据，如城市变更等数据都会实时更新
+///定位sdk-v1.3之后，开发者可以选择是否需要最新版本rgc数据，1.9之后默认是需要YES；YES的情况下，定位sdk会实时返回最新的rgc数据，如城市变更等数据都会实时更新
 @property (nonatomic, assign) BOOL isNeedNewVersionReGeocode;
 
 
 ///开发者可以指定该用户的id，用于后续统一识别用户，便于查找问题
 @property(nonatomic, copy, nullable) NSString * userID;
+
+///返回定位精度等级，IOS14之后用户可以直接控制返回定位的精度等级，开发者可以通过这个值适配不同定位等级下的产品逻辑
+@property (nonatomic, readonly) BMKLAccuracyAuthorization accuracyAuthorization;
 
 
 /**
@@ -182,6 +194,30 @@ typedef void (^BMKLocatingCompletionBlock)(BMKLocation * _Nullable location, BMK
 + (BOOL) BMKLocationDataAvailableForCoordinate:(CLLocationCoordinate2D)coordinate withCoorType:(BMKLocationCoordinateType)coortype;
 
 
+
+/**
+ *  @brief 返回当前定位权限
+ *  @return CLAuthorizationStatus 定位权限枚举类型
+ */
+- (CLAuthorizationStatus)authorizationStatus;
+
+
+/**
+ *  @brief 如果你没有全量定位等级精度权限，利用该接口可以临时请求一次全量定位精度等级，系统会抛出弹框让用户确认是否授权app授予相应权限
+ *  @param purposeKey info.plist中NSLocationTemporaryUsageDescriptionDictionary定义的key，对应相应的value可以详细描述申请全量定位精度等级的原因
+ *  @param completion 回调是否
+ *  @return
+ */
+- (void)requestTemporaryFullAccuracyAuthorizationWithPurposeKey:(NSString * _Nonnull)purposeKey completion:(void(^ _Nullable)(NSError * _Nullable))completion API_AVAILABLE(ios(14.0));
+
+/**
+ *  @brief 请求一次全量定位精度等级
+ *  @param purposeKey info.plist中NSLocationTemporaryUsageDescriptionDictionary定义的key
+ *  @return
+ */
+- (void)requestTemporaryFullAccuracyAuthorizationWithPurposeKey:(NSString * _Nonnull)purposeKey API_AVAILABLE(ios(14.0));
+
+
 @end
 
 #pragma mark - BMKLocationManagerDelegate
@@ -221,7 +257,14 @@ typedef void (^BMKLocatingCompletionBlock)(BMKLocation * _Nullable location, BMK
  *  @param manager 定位 BMKLocationManager 类。
  *  @param status 定位权限状态。
  */
-- (void)BMKLocationManager:(BMKLocationManager * _Nonnull)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status;
+- (void)BMKLocationManager:(BMKLocationManager * _Nonnull)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status API_DEPRECATED_WITH_REPLACEMENT("-BMKLocationManagerDidChangeAuthorization", ios(4.2, 14.0));
+
+
+/**
+ *  @brief authorizationStatus或者accuracyAuthorization有变化时回调函数
+ *  @param manager 定位 BMKLocationManager 类。
+ */
+- (void)BMKLocationManagerDidChangeAuthorization:(BMKLocationManager * _Nonnull)manager;
 
 
 /**
