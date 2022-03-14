@@ -23,6 +23,18 @@ typedef NS_ENUM(int, BMKLocationProvider) {
     
 };
 
+/**
+ * BMKMockLocationProbability 位置数据为作弊定位的概率
+ *
+ */
+typedef NS_ENUM(int, BMKMockLocationProbability) {
+    
+    BMKMockLocationProbabilityNone = 0,           //!<作弊概率为0
+    BMKMockLocationProbabilityLow,        //!<低概率
+    BMKMockLocationProbabilityMid,        //!<中概率
+    BMKMockLocationProbabilityHigh        //!<高概率
+};
+
 ///描述百度iOS 定位数据
 @interface BMKLocation : NSObject
 
@@ -37,6 +49,9 @@ typedef NS_ENUM(int, BMKLocationProvider) {
 
 ///BMKLocation 位置ID
 @property(nonatomic, retain) NSString * _Nullable locationID;
+
+///BMKLocation 位置作弊概率
+@property(nonatomic, assign) BMKMockLocationProbability mockProbability;
 
 /*
  *  floorString
