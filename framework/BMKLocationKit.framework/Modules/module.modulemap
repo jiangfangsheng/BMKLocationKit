@@ -1,0 +1,6 @@
+framework module BMKLocationKit {
+  umbrella header "BMKLocationComponent.h"
+
+  export *
+  module * { export * }
+}
