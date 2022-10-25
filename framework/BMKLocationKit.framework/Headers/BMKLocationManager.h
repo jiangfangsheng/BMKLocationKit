@@ -88,6 +88,9 @@ typedef void (^BMKLocatingCompletionBlock)(BMKLocation * _Nullable location, BMK
 ///设定定位的最小更新距离。默认为 kCLDistanceFilterNone。
 @property(nonatomic, assign) CLLocationDistance distanceFilter;
 
+///设定设备朝向最小更新角度。默认为 1。since 2.0.5
+@property(nonatomic, assign) CLLocationDegrees headingFilter;
+
 ///设定定位精度。默认为 kCLLocationAccuracyBest。
 @property(nonatomic, assign) CLLocationAccuracy desiredAccuracy;
 

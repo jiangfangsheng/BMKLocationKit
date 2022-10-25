@@ -1,11 +1,11 @@
 1、版本：
-    百度地图iOS定位SDK v2.0.4
+    百度地图iOS定位SDK v2.0.5
 
 2、是否带IDFA：
-    是
+    无
 
 3、是否为Bitcode：
-    是
+    否
 
 4、集成方法：
     http://lbsyun.baidu.com/index.php?title=ios-locsdk

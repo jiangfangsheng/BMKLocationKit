@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, BMKLocationAuthErrorCode) {
 @interface BMKLocationAuth : NSObject
 
 ///鉴权状态0：成功； 1：网络错误； 2：授权失败
-@property(nonatomic, readonly, assign) BMKLocationAuthErrorCode permisionState;
+@property(nonatomic, readonly, assign) BMKLocationAuthErrorCode permisionState __deprecated_msg("已废弃since 2.0.5");
 
 ///是否同意隐私合规政策
 @property(nonatomic, readonly, assign) BOOL isAgreePrivacy;
